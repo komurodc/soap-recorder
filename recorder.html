@@ -528,6 +528,8 @@ let phaseId       = 'counseling'; // URLパラメータから取得
   // URLパラメータから phase を取得
   const params = new URLSearchParams(window.location.search);
   phaseId = params.get('phase') || 'counseling';
+  // label パラメータがあればそちらで表示名を決定
+  const labelId = params.get('label') || phaseId;
   const phaseNames = {
     counseling : 'カウンセリング録音',
     exam       : '診察録音',
@@ -535,8 +537,8 @@ let phaseId       = 'counseling'; // URLパラメータから取得
     implant    : '治療相談録音',
   };
   const label = document.getElementById('phaseLabel');
-  label.textContent = phaseNames[phaseId] || '録音';
-  if (phaseId === 'exam' || phaseId === 'ortho' || phaseId === 'implant') {
+  label.textContent = phaseNames[labelId] || '録音';
+  if (phaseId === 'exam' || labelId === 'ortho' || labelId === 'implant') {
     label.classList.add('phase-exam');
   }
 
