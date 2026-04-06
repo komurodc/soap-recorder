@@ -710,11 +710,17 @@ async function sendAudio() {
     showProgress(true, '親画面へ送信中...', 70);
 
     // postMessage で親ウィンドウに送る
+    const mime = audioBlob.type || 'audio/mp4';
+    const ext = mime.includes('mp4') || mime.includes('aac') ? 'm4a'
+              : mime.includes('ogg') ? 'ogg'
+              : mime.includes('webm') ? 'webm'
+              : 'mp4';
     const message = {
       type    : 'SOAP_RECORDER_DONE',
       phase   : phaseId,
       base64  : base64,
-      mimeType: audioBlob.type || 'audio/webm',
+      mimeType: mime,
+      filename: 'recording.' + ext,
       sizeMB  : parseFloat((audioBlob.size / 1024 / 1024).toFixed(2)),
       durationSec: seconds,
     };
@@ -763,13 +769,11 @@ function blobToBase64(blob, onProgress) {
 // MIME type 選択
 // ============================================================
 function getSupportedMimeType() {
-  const candidates = [
-    'audio/webm;codecs=opus',
-    'audio/webm',
-    'audio/ogg;codecs=opus',
-    'audio/mp4',
-    'audio/mpeg',
-  ];
+  // iOSを最初にチェック（Safari は webm 非対応）
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const candidates = isIOS
+    ? ['audio/mp4', 'audio/aac', 'audio/webm;codecs=opus', 'audio/webm']
+    : ['audio/webm;codecs=opus', 'audio/webm', 'audio/ogg;codecs=opus', 'audio/mp4', 'audio/mpeg'];
   for (const mt of candidates) {
     if (MediaRecorder.isTypeSupported(mt)) return mt;
   }
