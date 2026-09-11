@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小室歯科・矯正歯科オンライン相談 ご予約</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;background:#eef4f1;
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;}
+  .wrap{position:fixed;inset:0;display:flex;flex-direction:column;}
+  /* 予約ページを画面いっぱいに埋め込む */
+  iframe{flex:1;width:100%;border:0;display:block;background:#fff;}
+  /* 読み込みできなかったとき用の案内（iframeが表示されれば下に隠れて見えない） */
+  .fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    padding:24px;text-align:center;z-index:-1;}
+  .fallback .card{background:#fff;border-radius:16px;padding:28px;max-width:360px;
+    box-shadow:0 8px 30px rgba(20,60,50,.08);}
+  .fallback h1{font-size:17px;margin:0 0 10px;color:#123}
+  .fallback p{font-size:14px;color:#6b7a76;line-height:1.7;margin:0 0 16px}
+  .fallback a{display:block;padding:14px;background:#1f6f5c;color:#fff;border-radius:12px;
+    text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- 予約ページ（GAS）をそのまま埋め込む -->
+    <iframe
+      src="https://script.google.com/macros/s/AKfycbw4JQgcFAH5dIHf9L92dH3PWhGdvbcL78VNllN3XwzMBWmqVyw5_4rTsBzjcRWMGjSrng/exec"
+      title="ご予約"
+      allow="clipboard-write"></iframe>
+  </div>
+
+  <!-- 万一 iframe が表示できなかったときの案内（背面に置いてあるだけ） -->
+  <div class="fallback">
+    <div class="card">
+      <h1>ご予約ページ</h1>
+      <p>うまく表示されない場合は、下のボタンからお進みください。</p>
+      <a href="https://script.google.com/macros/s/AKfycbw4JQgcFAH5dIHf9L92dH3PWhGdvbcL78VNllN3XwzMBWmqVyw5_4rTsBzjcRWMGjSrng/exec" target="_top">予約ページを開く →</a>
+    </div>
+  </div>
+</body>
+</html>
